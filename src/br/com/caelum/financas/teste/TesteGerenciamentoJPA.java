@@ -15,7 +15,7 @@ public class TesteGerenciamentoJPA {
 		Conta conta = manager.find(Conta.class, 1);
 		manager.getTransaction().commit();
 		
-		conta.setTitular("New owner");
+		conta.setTitular("New owner"); 
 
 		manager.getTransaction().begin();
 		manager.merge(conta);
