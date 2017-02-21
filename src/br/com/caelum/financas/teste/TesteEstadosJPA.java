@@ -14,7 +14,9 @@ public class TesteEstadosJPA {
 		Conta conta = manager.find(Conta.class, 1);
 
 		manager.getTransaction().begin();
-
+		
+		conta.setTitular("Davi Gadelha");
+		
 		manager.getTransaction().commit();
 		
 		System.out.println(conta.getTitular());
