@@ -53,6 +53,5 @@ public class PopulaConta {
 		manager.getTransaction().commit();
 
 		manager.close();
-
 	}
 }

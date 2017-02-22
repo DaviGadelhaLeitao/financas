@@ -12,5 +12,4 @@ public class JPAUtil {
 	public EntityManager getEntityManager() {
 		return entityManagerFactory.createEntityManager();
 	}
-
 }

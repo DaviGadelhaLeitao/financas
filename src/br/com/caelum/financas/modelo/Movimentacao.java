@@ -16,14 +16,23 @@ import javax.persistence.TemporalType;
 @Entity
 public class Movimentacao {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	private BigDecimal valor;
 	
+	private String descricao;
+
+	@Temporal(TemporalType.DATE)
+	private Calendar data;
+
+	@ManyToOne
+	private Conta conta;
+	
+	private BigDecimal valor;
+
 	@Enumerated(EnumType.STRING)
 	private TipoMovimentacao tipoMovimentacao;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -64,18 +73,11 @@ public class Movimentacao {
 		this.conta = conta;
 	}
 
-	@Temporal(TemporalType.DATE)
-	private Calendar data;
-	
-	@ManyToOne
-	private Conta conta;
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 }
-
-
-
-
-
-
-
-
-
