@@ -22,7 +22,10 @@ public class Conta {
 	@OneToMany(mappedBy="conta")
 	private List<Movimentacao> movimentacoes;
 	
-	
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
+	}
+
 	public Integer getId() {
 		return id;
 	}
