@@ -1,9 +1,13 @@
 package br.com.caelum.financas.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Conta {
@@ -15,7 +19,10 @@ public class Conta {
 	private String banco;
 	private String agencia;
 	private String numero;
-
+	@OneToMany(mappedBy="conta")
+	private List<Movimentacao> movimentacoes;
+	
+	
 	public Integer getId() {
 		return id;
 	}

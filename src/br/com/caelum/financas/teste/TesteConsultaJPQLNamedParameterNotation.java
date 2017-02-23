@@ -10,35 +10,29 @@ import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
 import br.com.caelum.financas.util.JPAUtil;
 
-public class TesteConsultaJPQL {
+public class TesteConsultaJPQLNamedParameterNotation {
 
 	public static void main(String[] args) {
 
 		EntityManager manager = new JPAUtil().getEntityManager();
 		Conta conta = new Conta();
 		conta.setId(1);
-		
-		Query query = manager.createQuery("select m from Movimentacao m where m.conta=?1" + " and m.tipoMovimentacao=?2");
-		
-		query.setParameter(1, conta);
-		query.setParameter(2, TipoMovimentacao.ENTRADA);
-		
+
+		Query query = manager.createQuery(
+				"select m from Movimentacao m where m.conta=:pConta"
+				+ " and m.tipoMovimentacao=:pTipoMovimentacao"
+				+ " order by m.valor");
+
+		query.setParameter("pConta", conta);
+		query.setParameter("pTipoMovimentacao", TipoMovimentacao.ENTRADA);
+
 		List<Movimentacao> movimentacoes = query.getResultList();
-		
+
 		for (Movimentacao movimentacao : movimentacoes) {
 			System.out.println("\nDescrição ..: " + movimentacao.getDescricao());
 			System.out.println("Valor ..: " + movimentacao.getValor());
 			System.out.println("Tipo ..: " + movimentacao.getTipoMovimentacao());
 		}
-		
 		manager.close();
 	}
-
 }
-
-
-
-
-
-
-
