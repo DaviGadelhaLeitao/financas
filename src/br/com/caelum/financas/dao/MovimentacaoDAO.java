@@ -37,4 +37,28 @@ public class MovimentacaoDAO {
 
 		return singleResult;
 	}
+	
+	public Long getTotalDeMovimentacoesDeUmaConta(Conta conta) {
+
+		TypedQuery<Long> query = manager.createNamedQuery("getTotalDeMovimentacoesDeUmaConta", Long.class);
+		query.setParameter("pConta", conta);
+		return query.getSingleResult();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
