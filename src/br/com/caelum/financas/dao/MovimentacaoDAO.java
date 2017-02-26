@@ -15,10 +15,17 @@ public class MovimentacaoDAO {
 	public MovimentacaoDAO(EntityManager manager) {
 		this.manager = manager;
 	}
+	
+	public Double getGastoMedioDeUmaConta(Conta conta) {
+		
+		TypedQuery<Double> query = manager.createQuery("select avg(m.valor) from Movimentacao"
+				+ " m where m.conta=:pConta and m.tipoMovimentacao='SAIDA'", Double.class);
+		query.setParameter("pConta", conta);
+		return query.getSingleResult();
+	}
 
 	public BigDecimal somatorioDasMovimentacoesPeloTipo(Conta conta, TipoMovimentacao tipo) {
 
-		// named parameter query
 		String jpql = "select sum(m.valor) from Movimentacao m where m.conta=:pConta " + "and m.tipoMovimentacao=:pTipo";
 
 		TypedQuery<BigDecimal> query = manager.createQuery(jpql, BigDecimal.class);
@@ -29,7 +36,5 @@ public class MovimentacaoDAO {
 		BigDecimal singleResult = query.getSingleResult();
 
 		return singleResult;
-
 	}
-
 }
