@@ -10,9 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+// two advantages, force the use of named parameters, and if model changes it will force the named query to change as well
+@NamedQuery(name="mediaDaContaPeloTipoMovimentacao",
+	query="select avg(m.valor) from Movimentacao m where m.conta=:pConta "
+		+ " and m.tipoMovimentacao=:pTipo")
+	
 @Entity
 public class Movimentacao {
 

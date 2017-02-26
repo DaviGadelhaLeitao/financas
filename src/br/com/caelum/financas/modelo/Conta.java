@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,12 +14,17 @@ public class Conta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@OneToMany(mappedBy="conta")
+	private List<Movimentacao> movimentacoes;
+	
 	private String titular;
 	private String banco;
 	private String agencia;
 	private String numero;
-	@OneToMany(mappedBy="conta")
-	private List<Movimentacao> movimentacoes;
+	
+	
+	
 	
 	public List<Movimentacao> getMovimentacoes() {
 		return movimentacoes;
